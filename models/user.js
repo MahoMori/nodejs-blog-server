@@ -27,30 +27,30 @@ const User = new Schema({
     type: [Session],
   },
 
-  articles: [
-    {
-      title: {
-        type: String,
-        required: true,
-      },
-      content: {
-        type: String,
-        required: true,
-      },
-      comments: [
-        {
-          name: {
-            type: String,
-            required: true,
-          },
-          comment: {
-            type: String,
-            required: true,
-          },
-        },
-      ],
-    },
-  ],
+  // articles: [
+  //   {
+  //     title: {
+  //       type: String,
+  //       required: true,
+  //     },
+  //     content: {
+  //       type: String,
+  //       required: true,
+  //     },
+  //     comments: [
+  //       {
+  //         name: {
+  //           type: String,
+  //           required: true,
+  //         },
+  //         comment: {
+  //           type: String,
+  //           required: true,
+  //         },
+  //       },
+  //     ],
+  //   },
+  // ],
 });
 
 User.set("toJSON", {

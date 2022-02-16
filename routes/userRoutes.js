@@ -18,8 +18,9 @@ router.post("/signup", (req, res, next) => {
       message: "First name required",
     });
   } else {
-    User.register(new User({ username: req.body.username }));
-    req.body.password,
+    User.register(
+      new User({ username: req.body.username }),
+      req.body.password,
       (err, user) => {
         if (err) {
           res.status(500).send(err);
@@ -38,7 +39,8 @@ router.post("/signup", (req, res, next) => {
             }
           });
         }
-      };
+      }
+    );
   }
 });
 
@@ -48,7 +50,7 @@ router.post("/login", passport.authenticate("local"), (req, res, next) => {
 
   User.findById(req.user._id)
     .then((user) => {
-      user.refreshToken / push({ refreshToken });
+      user.refreshToken.push({ refreshToken });
       user.save((err, user) => {
         if (err) {
           res.status(500).send(err);
@@ -76,7 +78,7 @@ router.post("/refreshToken", (req, res, next) => {
       User.findOne({ _id: userId })
         .then((user) => {
           if (user) {
-            const tokenIndex = user.refreshToken.findindex(
+            const tokenIndex = user.refreshToken.findIndex(
               (item) => item.refreshToken === refreshToken
             );
 
@@ -114,18 +116,18 @@ router.get("/me", verifyUser, (req, res, next) => {
   res.send(req.user);
 });
 
-router.post("/logout", verifyUser, (req, res, next) => {
+router.get("/logout", verifyUser, (req, res, next) => {
   const { signedCookies = {} } = req;
   const { refreshToken } = signedCookies;
 
   User.findById(req.user._id)
     .then((user) => {
-      const tokenIndex = user.refreshToken.findindex(
+      const tokenIndex = user.refreshToken.findIndex(
         (item) => item.refreshToken === refreshToken
       );
 
       if (tokenIndex !== -1) {
-        user.refreshToken.id(user.refreshoken[tokenIndex]._id).remove();
+        user.refreshToken.id(user.refreshToken[tokenIndex]._id).remove();
       }
       user.save((err, user) => {
         if (err) {
