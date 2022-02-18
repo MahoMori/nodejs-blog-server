@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
+const timeout = require("connect-timeout");
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
@@ -16,7 +17,7 @@ const userRouter = require("./routes/userRoutes");
 const articleRouter = require("./routes/articleRoutes");
 
 const app = express();
-
+app.use(timeout("5s"));
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
