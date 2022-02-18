@@ -17,7 +17,7 @@ const userRouter = require("./routes/userRoutes");
 const articleRouter = require("./routes/articleRoutes");
 
 const app = express();
-app.use(timeout("100s"));
+app.use(timeout("80s"));
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
